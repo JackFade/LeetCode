@@ -12,7 +12,7 @@ package linklist;
 输入：1->2->4, 1->3->4
 输出：1->1->2->3->4->4
 */
-public class T21 {
+public class L21 {
 
     public static void main(String[] args) {
         ListNode nodeA1 = new ListNode(1);
@@ -29,7 +29,7 @@ public class T21 {
         nodeB2.next = nodeB3;
         nodeB3.next = null;
 
-        new T21().mergeTwoLists(nodeA1, nodeB1).printList();
+        new L21().mergeTwoLists(nodeA1, nodeB1).printList();
     }
 
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {

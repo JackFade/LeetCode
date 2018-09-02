@@ -30,7 +30,7 @@ B:     b1 → b2 → b3
 可假定整个链表结构中没有循环。
 程序尽量满足 O(n) 时间复杂度，且仅用 O(1) 内存。
 */
-public class T160 {
+public class L160 {
     public static void main(String[] args) {
         ListNode nodeA1 = new ListNode(1);
         ListNode nodeA2 = new ListNode(2);
@@ -50,7 +50,7 @@ public class T160 {
         nodeC3.next = null;
         nodeA1.printList();
         nodeB1.printList();
-        new T160().getIntersectionNode2(nodeA1, nodeB1).printList();
+        new L160().getIntersectionNode2(nodeA1, nodeB1).printList();
     }
 
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {

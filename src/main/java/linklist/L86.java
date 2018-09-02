@@ -14,7 +14,7 @@ package linklist;
 输入: head = 1->4->3->2->5->2, x = 3
 输出: 1->2->2->4->3->5
 */
-public class T86 {
+public class L86 {
     public static void main(String[] args) {
         ListNode nodeA1 = new ListNode(1);
         ListNode nodeA2 = new ListNode(4);
@@ -29,8 +29,8 @@ public class T86 {
         nodeA5.next = nodeA6;
         nodeA6.next = null;
 
-        new T86().partition1(nodeA1, 3).printList();
-        new T86().partition1(new ListNode(5), 2).printList();
+        new L86().partition1(nodeA1, 3).printList();
+        new L86().partition1(new ListNode(5), 2).printList();
     }
 
     public ListNode partition1(ListNode head, int x) {

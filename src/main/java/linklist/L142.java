@@ -12,7 +12,7 @@ import java.util.Set;
 
 说明：不允许修改给定的链表。
 */
-public class T142 {
+public class L142 {
     public static void main(String[] args) {
         ListNode nodeA1 = new ListNode(1);
         ListNode nodeA2 = new ListNode(2);
@@ -31,9 +31,9 @@ public class T142 {
         nodeA7.next = nodeA8;
         nodeA8.next = nodeA4;
         nodeA1.printList();
-        new T142().detectCycle1(nodeA1).printList();
-        new T142().detectCycle2(nodeA1).printList();
-        new T142().detectCycle2(new ListNode(8)).printList();
+        new L142().detectCycle1(nodeA1).printList();
+        new L142().detectCycle2(nodeA1).printList();
+        new L142().detectCycle2(new ListNode(8)).printList();
     }
 
     public ListNode detectCycle1(ListNode head) {

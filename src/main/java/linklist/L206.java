@@ -12,7 +12,7 @@ package linklist;
 输入: 1->2->3->4->5->NULL
 输出: 5->4->3->2->1->NULL
 */
-public class T206 {
+public class L206 {
     public static void main(String[] args) {
         ListNode nodeA1 = new ListNode(1);
         ListNode nodeA2 = new ListNode(2);
@@ -25,7 +25,7 @@ public class T206 {
         nodeA4.next = nodeA5;
         nodeA5.next = null;
 
-        new T206().reverseList(nodeA1).printList();
+        new L206().reverseList(nodeA1).printList();
     }
 
     public ListNode reverseList(ListNode head) {

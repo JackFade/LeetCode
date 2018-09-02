@@ -15,7 +15,7 @@ package linklist;
 输入: 1->2->3->4->5->NULL, m = 2, n = 4
 输出: 1->4->3->2->5->NULL
 */
-public class T92 {
+public class L92 {
     public static void main(String[] args) {
         ListNode nodeA1 = new ListNode(1);
         ListNode nodeA2 = new ListNode(2);
@@ -28,7 +28,7 @@ public class T92 {
         nodeA4.next = nodeA5;
         nodeA5.next = null;
 
-        new T92().reverseBetween(nodeA1, 2, 4).printList();
+        new L92().reverseBetween(nodeA1, 2, 4).printList();
     }
 
     public ListNode reverseBetween(ListNode head, int m, int n) {
