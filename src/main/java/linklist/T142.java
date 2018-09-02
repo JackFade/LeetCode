@@ -29,12 +29,53 @@ public class T142 {
         nodeA5.next = nodeA6;
         nodeA6.next = nodeA7;
         nodeA7.next = nodeA8;
-        nodeA8.next = nodeA5;
+        nodeA8.next = nodeA4;
         nodeA1.printList();
-        new T142().detectCycle(nodeA1).printList();
+//        new T142().detectCycle1(nodeA1).printList();
+//        new T142().detectCycle2(nodeA1).printList();
+        new T142().detectCycle2(new ListNode(8)).printList();
     }
 
-    public ListNode detectCycle(ListNode head) {
+    public ListNode detectCycle1(ListNode head) {
+        Set<ListNode> nodeSet = new HashSet<ListNode>();
+
+        for (ListNode cur = head; cur != null; cur = cur.next) {
+            if (nodeSet.contains(cur)) {
+                return cur;
+            } else {
+                nodeSet.add(cur);
+            }
+        }
+
         return null;
+    }
+
+    public ListNode detectCycle2(ListNode head) {
+        ListNode slower = head;
+        ListNode faster = head;
+
+
+        while (slower != null && faster != null) {
+            slower = slower.next;
+            faster = faster.next;
+
+            if (faster == null || faster.next == null) {
+                // 无环的情况
+                return null;
+            } else {
+                faster = faster.next;
+            }
+
+            if (faster == slower) {
+                break;
+            }
+        }
+
+        faster = head;
+        while (faster != slower) {
+            faster = faster.next;
+            slower = slower.next;
+        }
+        return faster;
     }
 }
