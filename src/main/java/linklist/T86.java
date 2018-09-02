@@ -33,6 +33,7 @@ public class T86 {
     }
 
     public ListNode partition(ListNode head, int x) {
+
         return null;
     }
 }

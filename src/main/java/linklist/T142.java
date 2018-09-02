@@ -31,8 +31,8 @@ public class T142 {
         nodeA7.next = nodeA8;
         nodeA8.next = nodeA4;
         nodeA1.printList();
-//        new T142().detectCycle1(nodeA1).printList();
-//        new T142().detectCycle2(nodeA1).printList();
+        new T142().detectCycle1(nodeA1).printList();
+        new T142().detectCycle2(nodeA1).printList();
         new T142().detectCycle2(new ListNode(8)).printList();
     }
 
