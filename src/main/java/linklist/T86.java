@@ -29,11 +29,72 @@ public class T86 {
         nodeA5.next = nodeA6;
         nodeA6.next = null;
 
-        new T86().partition(nodeA1, 3).printList();
+        new T86().partition1(nodeA1, 3).printList();
+        new T86().partition1(new ListNode(5), 2).printList();
+    }
+
+    public ListNode partition1(ListNode head, int x) {
+        ListNode cur = head;
+        ListNode ltHead = null;
+        ListNode ltTail = null;
+        ListNode geHead = null;
+        ListNode geTail = null;
+
+        while (cur != null) {
+            if (cur.val < x) {
+                if (ltHead == null) {
+                    ltHead = cur;
+                } else {
+                    ltTail.next = cur;
+                }
+                ltTail = cur;
+
+            } else {
+                if (geHead == null) {
+                    geHead = cur;
+                } else {
+                    geTail.next = cur;
+                }
+                geTail = cur;
+            }
+
+            cur = cur.next;
+        }
+
+        if (ltHead == null) {
+            return geHead;
+        } else if (geHead == null) {
+            return ltHead;
+        } else {
+            ltTail.next = geHead;
+        }
+
+        return ltHead;
     }
 
     public ListNode partition(ListNode head, int x) {
+        if (head==null||head.next==null){
+            return head;
+        }
 
-        return null;
+        ListNode ltHead = new ListNode(0);
+        ListNode ltTail = ltHead;
+        ListNode geHead = new ListNode(0);
+        ListNode geTail = geHead;
+
+        while (head != null) {
+            if (head.val < x) {
+                ltTail.next = head;
+                ltTail = head;
+            } else {
+                geTail.next = head;
+                geTail = head;
+            }
+            head = head.next;
+        }
+        geTail.next = null;
+        ltTail.next = geHead.next;
+
+        return ltHead.next;
     }
 }
