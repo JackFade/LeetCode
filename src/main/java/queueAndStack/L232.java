@@ -1,5 +1,7 @@
 package queueAndStack;
 
+import java.util.Stack;
+
 /*
 * 使用栈实现队列的下列操作：
 
@@ -23,40 +25,98 @@ queue.empty(); // 返回 false
 假设所有操作都是有效的 （例如，一个空的队列不会调用 pop 或者 peek 操作）。
 * */
 public class L232 {
-    class MyQueue {
 
-        /** Initialize your data structure here. */
-        public MyQueue() {
+    public static void main(String[] args) {
+        MyQueue2 queue = new MyQueue2();
 
+        queue.push(1);
+        queue.push(2);
+        System.out.println(queue.peek());  // 返回 1
+        System.out.println(queue.pop());   // 返回 1
+        System.out.println(queue.empty()); // 返回 false
+        System.out.println(queue.pop());   // 返回 2
+        System.out.println(queue.empty()); // 返回 true
+        System.out.println(queue.pop());   // 返回 2
+    }
+}
+
+class MyQueue {
+
+    private Stack<Integer> queue = new Stack<Integer>();
+    private Stack<Integer> midStack = new Stack<Integer>();
+
+    /** Initialize your data structure here. */
+    public MyQueue() {
+
+    }
+
+    /** Push element x to the back of queue. */
+    public void push(int x) {
+        while (!queue.isEmpty()) {
+            midStack.push(queue.pop());
         }
-
-        /** Push element x to the back of queue. */
-        public void push(int x) {
-
-        }
-
-        /** Removes the element from in front of queue and returns that element. */
-        public int pop() {
-            return 0;
-        }
-
-        /** Get the front element. */
-        public int peek() {
-            return 0;
-        }
-
-        /** Returns whether the queue is empty. */
-        public boolean empty() {
-            return false;
+        midStack.push(x);
+        while (!midStack.isEmpty()) {
+            queue.push(midStack.pop());
         }
     }
 
-/**
- * Your MyQueue object will be instantiated and called as such:
- * MyQueue obj = new MyQueue();
- * obj.push(x);
- * int param_2 = obj.pop();
- * int param_3 = obj.peek();
- * boolean param_4 = obj.empty();
- */
+    /** Removes the element from in front of queue and returns that element. */
+    public int pop() {
+        return queue.pop();
+    }
+
+    /** Get the front element. */
+    public int peek() {
+        return queue.peek();
+    }
+
+    /** Returns whether the queue is empty. */
+    public boolean empty() {
+        return queue.empty();
+    }
+}
+
+
+
+class MyQueue2 {
+
+    private Stack<Integer> pushStack;
+    private Stack<Integer> popStack;
+
+    /** Initialize your data structure here. */
+    public MyQueue2() {
+        pushStack = new Stack<Integer>();
+        popStack = new Stack<Integer>();
+    }
+
+    /** Push element x to the back of queue. */
+    public void push(int x) {
+        pushStack.push(x);
+    }
+
+    /** Removes the element from in front of queue and returns that element. */
+    public int pop() {
+        if (popStack.isEmpty()) {
+            while (!pushStack.isEmpty()) {
+                popStack.push(pushStack.pop());
+            }
+        }
+        return popStack.pop();
+    }
+
+    /** Get the front element. */
+    public int peek() {
+        if (popStack.isEmpty()) {
+            while (!pushStack.isEmpty()) {
+                popStack.push(pushStack.pop());
+            }
+        }
+        return popStack.peek();
+    }
+
+    /** Returns whether the queue is empty. */
+    public boolean empty() {
+        return popStack.isEmpty() && pushStack.isEmpty();
+    }
 }
