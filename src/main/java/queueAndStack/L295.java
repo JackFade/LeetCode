@@ -39,7 +39,7 @@ public class L295 {
         }
 
         public double findMedian() {
-
+            return 0;
         }
     }
 

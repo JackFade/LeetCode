@@ -29,17 +29,17 @@ public class L225 {
 
         /** Removes the element on top of the stack and returns that element. */
         public int pop() {
-
+            return 0;
         }
 
         /** Get the top element. */
         public int top() {
-
+            return 0;
         }
 
         /** Returns whether the stack is empty. */
         public boolean empty() {
-
+            return false;
         }
     }
 
