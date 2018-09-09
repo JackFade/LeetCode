@@ -1,5 +1,8 @@
 package queueAndStack;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /*
 *
 使用队列实现栈的下列操作：
@@ -15,40 +18,54 @@ empty() -- 返回栈是否为空
 你可以假设所有操作都是有效的（例如, 对一个空的栈不会调用 pop 或者 top 操作）。
 * */
 public class L225 {
-    class MyStack {
+    public static void main(String[] args) {
+        MyStack stack= new MyStack();
+        stack.push(1);
+        System.out.println(stack.top());
+        stack.pop();
+        stack.push(2);
+        System.out.println(stack.top());
+        stack.push(3);
+        System.out.println(stack.top());
+        stack.pop();
+        System.out.println(stack.top());
+        stack.pop();
+        System.out.println(stack.top());
 
-        /** Initialize your data structure here. */
-        public MyStack() {
+    }
+}
 
-        }
+class MyStack {
 
-        /** Push element x onto stack. */
-        public void push(int x) {
+    Queue<Integer> queueOut = new LinkedList<Integer>();
 
-        }
+    /** Initialize your data structure here. */
+    public MyStack() {
 
-        /** Removes the element on top of the stack and returns that element. */
-        public int pop() {
-            return 0;
-        }
-
-        /** Get the top element. */
-        public int top() {
-            return 0;
-        }
-
-        /** Returns whether the stack is empty. */
-        public boolean empty() {
-            return false;
-        }
     }
 
-/**
- * Your MyStack object will be instantiated and called as such:
- * MyStack obj = new MyStack();
- * obj.push(x);
- * int param_2 = obj.pop();
- * int param_3 = obj.top();
- * boolean param_4 = obj.empty();
- */
+    /** Push element x onto stack. */
+    public void push(int x) {
+        Queue queue = new LinkedList();
+        queue.add(x);
+        while (!queueOut.isEmpty()) {
+            queue.add(queueOut.poll());
+        }
+        queueOut = queue;
+    }
+
+    /** Removes the element on top of the stack and returns that element. */
+    public int pop() {
+            return queueOut.poll();
+    }
+
+    /** Get the top element. */
+    public int top() {
+        return queueOut.peek();
+    }
+
+    /** Returns whether the stack is empty. */
+    public boolean empty() {
+        return queueOut.isEmpty();
+    }
 }
