@@ -1,5 +1,7 @@
 package queueAndStack;
 
+import java.util.Stack;
+
 /*
 设计一个支持 push，pop，top 操作，并能在常数时间内检索到最小元素的栈。
 
@@ -19,28 +21,19 @@ package queueAndStack;
         minStack.getMin();   --> 返回 -2.
 */
 public class L155 {
-    class MinStack {
 
-        /** initialize your data structure here. */
-        public MinStack() {
-
-        }
-
-        public void push(int x) {
-
-        }
-
-        public void pop() {
-
-        }
-
-        public int top() {
-            return 0;
-        }
-
-        public int getMin() {
-            return 0;
-        }
+    public static void main(String[] args) {
+        MinStack stack= new MinStack();
+        stack.push(-2);
+        System.out.println(stack.getMin());
+        stack.push(0);
+        System.out.println(stack.getMin());
+        stack.push(-3);
+        System.out.println(stack.getMin());
+        stack.pop();
+        System.out.println(stack.getMin());
+        stack.pop();
+        System.out.println(stack.getMin());
     }
 
 /**
@@ -51,4 +44,37 @@ public class L155 {
  * int param_3 = obj.top();
  * int param_4 = obj.getMin();
  */
+}
+
+class MinStack {
+
+    Stack<Integer> stack = new Stack<Integer>();
+    Stack<Integer> minStack = new Stack<Integer>();
+
+    /** initialize your data structure here. */
+    public MinStack() {
+
+    }
+
+    public void push(int x) {
+        stack.push(x);
+        if (!minStack.isEmpty() && x > minStack.peek()) {
+            minStack.push(minStack.peek());
+        } else {
+            minStack.push(x);
+        }
+    }
+
+    public int pop() {
+        minStack.pop();
+        return stack.pop();
+    }
+
+    public int top() {
+        return stack.peek();
+    }
+
+    public int getMin() {
+        return minStack.peek();
+    }
 }
