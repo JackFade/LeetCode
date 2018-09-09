@@ -1,5 +1,9 @@
 package queueAndStack;
 
+import java.util.Comparator;
+import java.util.PriorityQueue;
+import java.util.Queue;
+
 /*
 * 中位数是有序列表中间的数。如果列表长度是偶数，中位数则是中间两个数的平均值。
 
@@ -27,28 +31,63 @@ findMedian() -> 2
 * */
 public class L295 {
 
-    class MedianFinder {
+    public static void main(String[] args) {
+        MedianFinder medianFinder = new MedianFinder();
 
-        /** initialize your data structure here. */
-        public MedianFinder() {
+        medianFinder.addNum(1);
+        medianFinder.addNum(2);
+        System.out.println(medianFinder.findMedian());
+        medianFinder.addNum(3);
+        System.out.println(medianFinder.findMedian());
+    }
+}
 
+class MedianFinder {
+    Queue<Integer> lowerHalf = new PriorityQueue<Integer>(new Comparator<Integer>() {
+        public int compare(Integer o1, Integer o2) {
+            return o2 - o1;
+        }
+    });
+
+    Queue<Integer> higherHalf = new PriorityQueue<Integer>(new Comparator<Integer>() {
+        public int compare(Integer o1, Integer o2) {
+            return o1 - o2;
+        }
+    });
+
+    /** initialize your data structure here. */
+    public MedianFinder() {
+
+    }
+
+    public void addNum(int num) {
+        if (lowerHalf.isEmpty()) {
+            lowerHalf.add(num);
+            return;
         }
 
-        public void addNum(int num) {
-
+        if (lowerHalf.peek() > num) {
+            lowerHalf.add(num);
+        } else {
+            higherHalf.add(num);
         }
 
-        public double findMedian() {
-            return 0;
+        if (lowerHalf.size() - higherHalf.size() == 2) {
+            higherHalf.add(lowerHalf.poll());
+        } else if (higherHalf.size() - lowerHalf.size() == 2) {
+            lowerHalf.add(higherHalf.poll());
         }
     }
 
-/**
- * Your MedianFinder object will be instantiated and called as such:
- * MedianFinder obj = new MedianFinder();
- * obj.addNum(num);
- * double param_2 = obj.findMedian();
- */
+    public double findMedian() {
+        if (lowerHalf.size() == higherHalf.size()) {
+            return (lowerHalf.peek() + higherHalf.peek()) / 2.0;
+        } else if (lowerHalf.size() > higherHalf.size()) {
+            return lowerHalf.peek();
+        } else {
+            return higherHalf.peek();
+        }
+    }
 }
 
 
