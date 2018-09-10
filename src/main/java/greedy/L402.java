@@ -26,7 +26,7 @@ num 不会包含任何前导零。
 public class L402 {
 }
 
-class Solution {
+class Solution402 {
     public String removeKdigits(String num, int k) {
         return "";
     }

@@ -22,7 +22,7 @@ package greedy;
 public class L45 {
 }
 
-class Solution {
+class Solution45 {
     public int jump(int[] nums) {
         return 0;
     }

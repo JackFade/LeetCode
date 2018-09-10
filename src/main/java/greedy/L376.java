@@ -26,7 +26,7 @@ package greedy;
 public class L376 {
 }
 
-class Solution {
+class Solution376 {
     public int wiggleMaxLength(int[] nums) {
         return 0;
     }

@@ -20,7 +20,7 @@ Example:
 public class L452 {
 }
 
-class Solution {
+class Solution452 {
     public int findMinArrowShots(int[][] points) {
         return 0;
     }
