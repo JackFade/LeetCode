@@ -24,10 +24,26 @@ package greedy;
 你能否用 O(n) 时间复杂度完成此题?
 */
 public class L376 {
+    public static void main(String[] args) {
+        System.out.println(new Solution376().wiggleMaxLength(new int[]{0,0}));
+    }
 }
 
 class Solution376 {
     public int wiggleMaxLength(int[] nums) {
-        return 0;
+        if (nums.length < 2) {
+            return nums.length;
+        }
+
+        int preVal = nums[1] - nums[0];
+        int maxCnt = preVal == 0 ? 1 : 2;
+        for (int i = 2; i < nums.length; i++) {
+            int diff = nums[i] - nums[i-1];
+            if (diff * preVal < 0 || (preVal ==0 && diff != 0)) {
+                maxCnt++;
+                preVal = diff;
+            }
+        }
+        return maxCnt;
     }
 }
