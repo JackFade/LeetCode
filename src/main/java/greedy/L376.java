@@ -30,7 +30,7 @@ public class L376 {
 }
 
 class Solution376 {
-    public int wiggleMaxLength(int[] nums) {
+    public int wiggleMaxLength1(int[] nums) {
         if (nums.length == 1) {
             return 1;
         }
@@ -41,12 +41,12 @@ class Solution376 {
         int status = BEGIN;
         int maxCnt = 1;
         for (int i = 1; i < nums.length; i++) {
-            int diff = nums[i] - nums[i-1];
+            int diff = nums[i] - nums[i - 1];
             if (status == BEGIN) {
                 if (diff > 0) {
                     status = UP;
                     maxCnt++;
-                } else if (diff < 0){
+                } else if (diff < 0) {
                     status = DOWN;
                     maxCnt++;
                 }
@@ -63,5 +63,9 @@ class Solution376 {
             }
         }
         return maxCnt;
+    }
+
+    public int wiggleMaxLength(int[] nums) {
+        return 0;
     }
 }
