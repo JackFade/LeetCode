@@ -20,10 +20,37 @@ package greedy;
 
 */
 public class L45 {
+    public static void main(String[] args) {
+        System.out.println(new Solution45().jump(new int[]{2,3,1}));
+        System.out.println(new Solution45().jump(new int[]{1,1,1,1}));
+        System.out.println(new Solution45().jump(new int[]{1,2,3}));
+        System.out.println(new Solution45().jump(new int[]{1,2}));
+        System.out.println(new Solution45().jump(new int[]{2,3,1,1,4}));
+    }
 }
 
 class Solution45 {
     public int jump(int[] nums) {
-        return 0;
+        if (nums.length < 2) {
+            return 0;
+        }
+        int minStep = 1; // 最小步长
+        int maxIndex = nums[0]; // 当前可达最大位置
+        int preMaxIndex = nums[0]; // 上一轮可达最大位置
+
+        for (int i = 1; i < nums.length && preMaxIndex < nums.length - 1; i++) {
+            if (i > preMaxIndex) { // 已经超过上一步可达的最大距离，说明已经新走了一步
+                minStep++;
+                preMaxIndex = maxIndex;
+            }
+
+            if (i + nums[i] > maxIndex) {
+                maxIndex = i + nums[i];
+                if (maxIndex >= nums.length - 1) {
+                    return minStep + 1;
+                }
+            }
+        }
+        return minStep;
     }
 }
