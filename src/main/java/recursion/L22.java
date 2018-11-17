@@ -1,5 +1,6 @@
 package recursion;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -20,10 +21,32 @@ import java.util.List;
 */
 
 public class L22 {
+    public static void main(String[] args) {
+        System.out.println(new Solution22().generateParenthesis(3));
+    }
 }
 
 class Solution22 {
     public List<String> generateParenthesis(int n) {
-        return null;
+        List<String> result = new ArrayList<>();
+
+        generateParenthesis(1, n, 1,"(", result);
+
+        return result;
+    }
+
+    private void generateParenthesis(int index, int n, int leftNum, String item, List<String> result) {
+        if (index == 2 * n) {
+            result.add(item);
+            return;
+        }
+
+        if (leftNum < n) {
+            generateParenthesis(index + 1, n, leftNum + 1, item + "(", result);
+        }
+
+        if (leftNum > item.length() - leftNum) {
+            generateParenthesis(index + 1, n, leftNum, item + ")", result);
+        }
     }
 }
