@@ -1,5 +1,6 @@
 package recursion;
 
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -29,10 +30,48 @@ import java.util.List;
 */
 
 public class L473 {
+    public static void main(String[] args) {
+        System.out.println(new Solution473().makesquare(new int[]{5,5,5,5,4,4,4,4,3,3,3,3}));
+    }
 }
 
 class Solution473 {
     public boolean makesquare(int[] nums) {
+        if(nums.length < 4) {
+            return false;
+        }
+        int sum = 0;
+        int maxNum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            maxNum = maxNum < nums[i] ? nums[i] : maxNum;
+        }
+
+        int edge = sum / 4;
+        if (sum % 4 != 0 || edge < maxNum) {
+            return false;
+        }
+
+        Arrays.sort(nums);
+
+        return makesquare(0, edge, new int[4], nums);
+    }
+
+    private boolean makesquare(int index, int edge, int[] buckets, int[] nums) {
+
+        for (int i = 0; i < buckets.length; i++) {
+            if (buckets[i] + nums[nums.length - index - 1] <= edge) {
+                if (index == nums.length-1) {
+                    return true;
+                } else {
+                    int[] newBuckets = Arrays.copyOf(buckets, buckets.length);
+                    newBuckets[i] = newBuckets[i] + nums[nums.length - index - 1];
+                    if(makesquare(index + 1, edge, newBuckets, nums)) {
+                        return true;
+                    }
+                }
+            }
+        }
         return false;
     }
 }
