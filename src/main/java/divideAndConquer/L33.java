@@ -24,12 +24,44 @@ package divideAndConquer;
 * */
 public class L33 {
     public static void main(String[] args) {
-        System.out.println(new L33.Solution().search(new int[]{4,5,6,7,0,1,2},0));
+
+        System.out.println(new L33.Solution().search(new int[]{15,17,19,20,0,1,3,5,7,9,11,13},15));
+        System.out.println(new L33.Solution().search(new int[]{15,17,19,20,0,1,3,5,7,9,11,13},17));
+        System.out.println(new L33.Solution().search(new int[]{15,17,19,20,0,1,3,5,7,9,11,13},19));
+        System.out.println(new L33.Solution().search(new int[]{15,17,19,20,0,1,3,5,7,9,11,13},20));
+        System.out.println(new L33.Solution().search(new int[]{15,17,19,20,0,1,3,5,7,9,11,13},0));
+        System.out.println(new L33.Solution().search(new int[]{15,17,19,20,0,1,3,5,7,9,11,13},1));
+        System.out.println(new L33.Solution().search(new int[]{15,17,19,20,0,1,3,5,7,9,11,13},3));
+        System.out.println(new L33.Solution().search(new int[]{15,17,19,20,0,1,3,5,7,9,11,13},5));
+        System.out.println(new L33.Solution().search(new int[]{15,17,19,20,0,1,3,5,7,9,11,13},7));
+        System.out.println(new L33.Solution().search(new int[]{15,17,19,20,0,1,3,5,7,9,11,13},9));
+        System.out.println(new L33.Solution().search(new int[]{15,17,19,20,0,1,3,5,7,9,11,13},11));
+        System.out.println(new L33.Solution().search(new int[]{15,17,19,20,0,1,3,5,7,9,11,13},13));
+        System.out.println(new L33.Solution().search(new int[]{15,17,19,20,0,1,3,5,7,9,11,13},14));
     }
 
     static class Solution {
         public int search(int[] nums, int target) {
-            return 0;
+            int start = 0, end = nums.length - 1, mid;
+            while (start <= end) {
+                mid = (start + end) / 2;
+                if (nums[mid] == target) {
+                    return mid;
+                } else if (nums[mid] > target) {
+                    if (nums[start] > nums[end] && nums[mid] >= nums[start] && nums[end] >= target) {
+                        start = mid + 1;
+                    } else {
+                        end = mid - 1;
+                    }
+                } else if (nums[mid] < target) {
+                    if (nums[start] >  nums[end] && nums[mid] <= nums[end] && nums[start] <= target) {
+                        end = mid - 1;
+                    } else {
+                        start = mid + 1;
+                    }
+                }
+            }
+            return -1;
         }
     }
 }
