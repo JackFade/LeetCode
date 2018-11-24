@@ -1,5 +1,9 @@
 package divideAndConquer;
 
+import javafx.util.Pair;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /*
@@ -19,12 +23,66 @@ import java.util.List;
 * */
 public class L315 {
     public static void main(String[] args) {
-        System.out.println(new L315.Solution().countSmaller(new int[]{4,5,6,7,0,1,2}));
+        System.out.println(new L315.Solution().countSmaller(new int[]{1,1}));
     }
 
     static class Solution {
         public List<Integer> countSmaller(int[] nums) {
-            return null;
+            if(nums.length == 1) {
+                List<Integer> count = new ArrayList<>(1);
+                count.add(0);
+                return count;
+            }
+
+            Integer[] countArray = new Integer[nums.length];
+            Arrays.fill(countArray, 0);
+            List<Integer> count = Arrays.asList(countArray);
+            Pair<Integer, Integer> [] pairs = new Pair[nums.length];
+            for (int i = 0; i < nums.length; i++) {
+                pairs[i] = new Pair<>(i, nums[i]);
+            }
+
+            pairCount(0, nums.length - 1, pairs, count);
+            return count;
+        }
+
+        private void pairCount(int start, int end, Pair<Integer, Integer>[] pairs, List<Integer> count) {
+            if (start < end) {
+                int mid = (start + end) / 2;
+                pairCount(start, mid, pairs, count);
+                pairCount(mid + 1, end, pairs, count);
+                mergePairs(start, mid, end, pairs, count);
+            }
+        }
+
+        private void mergePairs(int start, int mid, int end, Pair<Integer, Integer>[] pairs, List<Integer> count) {
+            Pair<Integer, Integer>[] tmpPairs = new Pair[end - start + 1];
+            int aIndex = start;
+            int bIndex = mid + 1;
+            int i = 0;
+            while (aIndex <= mid && bIndex <= end) {
+                if (pairs[aIndex].getValue() <= pairs[bIndex].getValue()) {
+                    tmpPairs[i++] = pairs[aIndex];
+                    count.set(pairs[aIndex].getKey(), count.get(pairs[aIndex].getKey()) +  (bIndex - mid -1));
+                    aIndex++;
+                } else if (pairs[aIndex].getValue() >= pairs[bIndex].getValue()) {
+                    tmpPairs[i++] = pairs[bIndex++];
+                }
+            }
+
+            while (aIndex <= mid) {
+                tmpPairs[i++] = pairs[aIndex];
+                count.set(pairs[aIndex].getKey(), count.get(pairs[aIndex].getKey()) +  (bIndex - mid -1));
+                aIndex++;
+            }
+
+            while (bIndex <= end) {
+                tmpPairs[i++] = pairs[bIndex++];
+            }
+
+            for (int j = 0; j < tmpPairs.length; j++) {
+                pairs[start+j] = tmpPairs[j];
+            }
         }
     }
 }
